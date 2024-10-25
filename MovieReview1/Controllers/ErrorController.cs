@@ -7,6 +7,12 @@ namespace MovieReview.Server.Controllers
     [ApiController]
     public class ErrorController : ControllerBase
     {
+        private ILogger _logger;
+        public ErrorController(ILoggerFactory loggerFactory)
+        {
+            _logger = loggerFactory.CreateLogger<ErrorController>();
+        }
+
         [ApiExplorerSettings(IgnoreApi = true)]
         [Route("error")]
         public async Task<IActionResult> HandleError()
@@ -16,6 +22,7 @@ namespace MovieReview.Server.Controllers
                 IExceptionHandlerPathFeature feature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
                 if (feature != null)
                 {
+                    _logger.LogCritical(feature.Error.Message);
                     return Problem(detail: feature.Error.Message);
                 }
             }

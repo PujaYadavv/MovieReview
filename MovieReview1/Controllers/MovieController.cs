@@ -9,15 +9,18 @@ namespace MovieReview.Server.Controllers
     public class MovieController : ControllerBase
     {
         private IMovieServices _movieServices;
+        private ILogger _logger;
 
-        public MovieController(IMovieServices movieServices) 
+        public MovieController(IMovieServices movieServices, ILoggerFactory loggerFactory) 
         {
             _movieServices = movieServices;
+            _logger = loggerFactory.CreateLogger<MovieController>();
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllMovies()
         {
+            _logger.LogError("Someone asked for all movie list");
             List<Movie> movies = await _movieServices.GetAllMovies();
             if(movies != null)
             {
