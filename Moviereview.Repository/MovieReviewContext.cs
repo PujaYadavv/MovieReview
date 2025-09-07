@@ -16,7 +16,8 @@ namespace Moviereview.Repository
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=127.0.0.1,1433; Database=MovieReviewDB; User=sa; Password=HAL@VSCPassword123; TrustServerCertificate=True;", options => options.CommandTimeout(300));
+            // optionsBuilder.UseSqlServer(@"Server=127.0.0.1,1433; Database=MovieReviewDB; User=sa; Password=HAL@VSCPassword123; TrustServerCertificate=True;", options => options.CommandTimeout(300));
+            optionsBuilder.UseSqlServer(@"Server = localhost,1433; Database = MyAppDB; User Id = sa; Password = Puja@9113446100; TrustServerCertificate = True;", options => options.CommandTimeout(300));
             base.OnConfiguring(optionsBuilder);
         }
     }
